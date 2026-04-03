@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { Pool } = require('pg');
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const bcrypt = require('bcrypt');
 
@@ -20,6 +19,7 @@ if (usePostgres) {
     console.log('⚠️ Using local SQLite Database.');
     console.log('Provide a DATABASE_URL in .env to use PostgreSQL.');
     console.log('-----------------------------------------');
+    const sqlite3 = require('sqlite3').verbose();
     const dbPath = path.resolve(__dirname, 'database.sqlite');
     sqliteDb = new sqlite3.Database(dbPath, (err) => {
         if (err) console.error('Error connecting to SQLite DB:', err.message);
