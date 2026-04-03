@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Control Center - Secure Saathi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .alert-pulse {
+            animation: bg-pulse 1s infinite alternate;
+        }
+
+        @keyframes bg-pulse {
+            from { background-color: rgba(239, 68, 68, 0.1); }
+            to { background-color: rgba(239, 68, 68, 0.4); }
+        }
+
+        .alert-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">🛡️ Central Security Command</div>
+        <div class="nav-user">
+            <span id="userNameDisplay">Control Officer</span>
+            <button id="logoutBtn" class="btn btn-danger" style="padding: 0.5rem 1rem;">End Shift</button>
+        </div>
+    </nav>
+
+    <div class="container" style="max-width: 1400px;">
+        <div class="dashboard-header">
+            <h2>Live Threat Monitoring</h2>
+            <div style="display:flex; gap: 1rem; align-items: center;">
+                <span style="display:flex; align-items:center; gap:0.5rem;"><div style="width:10px;height:10px;border-radius:50%;background:var(--secondary);"></div> Systems Online</span>
+                <button id="muteAlarmBtn" class="btn btn-primary" style="padding: 0.5rem 1rem; width: auto;">🔇 Mute Siren</button>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Panel: Live SOS Alerts -->
+            <div class="card card-animate" id="sosContainer" style="border-top: 4px solid var(--danger); animation-delay: 0.1s;">
+                <h3>🚨 Active SOS Alerts</h3>
+                <p>Prioritize these alarms instantly. They contain live GPS data from students in distress.</p>
+                <div id="alertsList" style="margin-top: 1rem;">
+                    <!-- Alerts dynamically injected here -->
+                    <div style="text-align:center; padding: 2rem; color: var(--text-muted);">No active emergencies. Space is clear.</div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Complaints Log -->
+            <div class="card card-animate" style="border-top: 4px solid var(--primary); animation-delay: 0.2s;">
+                <h3>📩 Student Complaints Log</h3>
+                <p>Recent reports regarding ragging, harassment, or security threats on campus.</p>
+                <div id="complaintsList" style="margin-top: 1rem;">
+                    <p style="text-align:center; padding: 2rem; color: var(--text-muted);">Loading secure tip lines...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- Hidden audio track for siren -->
+    <audio id="sirenSound" loop preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/security.js"></script>
+</body>
+</html>

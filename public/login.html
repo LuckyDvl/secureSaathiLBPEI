@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Saathi - Login & Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 500px; padding-top: 10vh;">
+        <div class="card">
+            <h1 style="text-align: center; margin-bottom: 2rem;">Secure Saathi</h1>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 1rem;">Login</button>
+                <p style="text-align: center;">New student? <a href="#" id="showRegister" style="color:#60A5FA;">Register here</a></p>
+                <div id="loginError" style="color:var(--danger); margin-top: 1rem; text-align: center;"></div>
+            </form>
+
+            <!-- Registration Form (Hidden by default) -->
+            <form id="registerForm" style="display: none;">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Roll Number</label>
+                    <input type="text" id="regRollNo" required>
+                </div>
+                <div class="form-group">
+                    <label>Course Name</label>
+                    <input type="text" id="regCourse" required>
+                </div>
+                <div class="form-group">
+                    <label>Emergency Phone</label>
+                    <input type="tel" id="regPhone" required>
+                </div>
+                
+                <!-- Hidden role for simple registration, securely should be server validated but for demo it's fine -->
+                <input type="hidden" id="regRole" value="student">
+                
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 1rem;">Create Account</button>
+                <p style="text-align: center;">Already have an account? <a href="#" id="showLogin" style="color:#60A5FA;">Login here</a></p>
+                <div id="regMessage" style="color:var(--secondary); margin-top: 1rem; text-align: center;"></div>
+                <div id="regError" style="color:var(--danger); margin-top: 1rem; text-align: center;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
