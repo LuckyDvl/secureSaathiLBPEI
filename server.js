@@ -42,12 +42,12 @@ function requireRole(role) {
 
 // Routes
 app.post('/api/register', async (req, res) => {
-    const { name, email, password, role, roll_no, course, phone } = req.body;
+    const { name, email, password, role, enroll_no, department, course, phone } = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.run(
-            'INSERT INTO users (name, email, password, role, roll_no, course, phone) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [name, email, hashedPassword, role, roll_no, course, phone]
+            'INSERT INTO users (name, email, password, role, enroll_no, department, course, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [name, email, hashedPassword, role, enroll_no, department, course, phone]
         );
         res.json({ success: true, message: 'Registration successful. Please login.' });
     } catch (err) {
@@ -102,7 +102,7 @@ app.post('/api/complaint', requireAuth, async (req, res) => {
 
 app.get('/api/complaints', requireAuth, requireRole('security'), async (req, res) => {
     try {
-        const rows = await db.all(`SELECT c.id, c.message, c.status, c.timestamp, u.name as studentName, u.roll_no, u.course, u.phone
+        const rows = await db.all(`SELECT c.id, c.message, c.status, c.timestamp, u.name as studentName, u.enroll_no, u.department, u.course, u.phone
             FROM complaints c JOIN users u ON c.student_id = u.id ORDER BY c.timestamp DESC`);
         res.json(rows);
     } catch (err) {
@@ -132,7 +132,7 @@ app.get('/api/my-complaints', requireAuth, async (req, res) => {
 
 app.get('/api/me', requireAuth, async (req, res) => {
     try {
-        const user = await db.get('SELECT id, name, email, role, roll_no, course, phone FROM users WHERE id = ?', [req.session.userId]);
+        const user = await db.get('SELECT id, name, email, role, enroll_no, department, course, phone FROM users WHERE id = ?', [req.session.userId]);
         if (!user) return res.status(404).json({ error: 'Not found' });
         res.json(user);
     } catch (err) {

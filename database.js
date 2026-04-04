@@ -119,10 +119,16 @@ async function initializeDB() {
             email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             role TEXT NOT NULL DEFAULT 'student',
-            roll_no TEXT,
+            enroll_no TEXT,
+            department TEXT,
             course TEXT,
             phone TEXT
         )`);
+
+        // Migration safety checks for existing DBs
+        try { await db.run(`ALTER TABLE users ADD COLUMN department TEXT`); } catch(e) {}
+        try { await db.run(`ALTER TABLE users ADD COLUMN enroll_no TEXT`); } catch(e) {}
+        try { await db.run(`ALTER TABLE users DROP COLUMN roll_no`); } catch(e) {}
 
         await db.run(`CREATE TABLE IF NOT EXISTS complaints (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

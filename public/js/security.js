@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 ${statusBadge}
             </div>
             <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-                Roll No: ${complaint.roll_no} | Course: ${complaint.course} | Phone: ${complaint.phone || 'N/A'} <br>
+                Enrollment No: ${complaint.enroll_no} | Dep: ${complaint.department || 'N/A'} | Course: ${complaint.course} | Phone: ${complaint.phone || 'N/A'} <br>
                 Time: ${new Date(complaint.timestamp).toLocaleString()}
             </div>
             <p style="color: var(--text-main); font-size: 0.95rem;">"${complaint.message}"</p>
@@ -138,8 +138,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div>${data.user.name}</div>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Roll Number</span>
-                    <div>${data.user.roll_no}</div>
+                    <span class="detail-label">Enrollment Number</span>
+                    <div>${data.user.enroll_no}</div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Department</span>
+                    <div>${data.user.department || 'N/A'}</div>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Course</span>

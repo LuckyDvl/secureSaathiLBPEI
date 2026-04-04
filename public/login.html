@@ -42,14 +42,34 @@
                 <div class="form-group">
                     <label>Password</label>
                     <input type="password" id="regPassword" required>
+                    <div id="passwordStrength" style="font-size: 0.8rem; margin-top: 0.3rem;"></div>
                 </div>
                 <div class="form-group">
-                    <label>Roll Number</label>
-                    <input type="text" id="regRollNo" required>
+                    <label>Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" required>
+                    <div id="passwordMatch" style="font-size: 0.8rem; margin-top: 0.3rem;"></div>
+                </div>
+                <div class="form-group">
+                    <label>Enrollment Number</label>
+                    <input type="text" id="regEnrollNo" required>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select id="regDepartment" required>
+                        <option value="" disabled selected>Select Department</option>
+                        <option value="CCSIT">CCSIT (Computing Sciences)</option>
+                        <option value="FOE">FOE (Engineering)</option>
+                        <option value="Law">College of Law</option>
+                        <option value="Nursing">College of Nursing</option>
+                        <option value="Paramedical">Paramedical Sciences</option>
+                        <option value="Arts">College of Arts</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Course Name</label>
-                    <input type="text" id="regCourse" required>
+                    <select id="regCourse" required disabled>
+                        <option value="" disabled selected>Select Department First</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Emergency Phone</label>
